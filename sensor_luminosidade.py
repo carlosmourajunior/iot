@@ -27,13 +27,20 @@ def readadc(gpio):
 	adcout = (r[1] << 8) & 0b1100000000
 	adcout = adcout | (r[2] & 0xff)	
 
+	led_status = "Desligado"
+
 	if adcout > sensibilidade:
 				
 		gpio.digital_write(LED, GPIO.HIGH)
+		led_status = "Ligado"
+
 	else: 
 		gpio.digital_write(LED, GPIO.LOW)		
+		led_status = "Apagado"
 	
 	print (adcout)
+	print ("Status do LED:%s" %led_status)
+
 	return r
 
 while True:
