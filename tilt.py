@@ -14,10 +14,5 @@ sleep_count = 0
 with GPIO(pins) as gpio:
 	while True:
 
-		value = gpio.digital_read(TILT)
-		if value == 1:
-			count += 1					
-	
+		value = gpio.wait_for_interrupt(1)								
 		print("Contador:" , count)
-		time.sleep(1)
-
