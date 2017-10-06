@@ -1,7 +1,6 @@
 import spidev
 import time
 from libsoc import gpio
-import threading
 
 from gpio_96boards import GPIO
 
@@ -25,10 +24,10 @@ def detectaTilt(gpio):
 		value = gpio.digital_read(TILT)
 		time.sleep(0.002)
 		if value == 1:
-			count += 1						
+			count += 1
 
 		sleep_count += 1
-		
+
 
 	print("Contador: %d"  %count)
 
@@ -42,7 +41,7 @@ def readTemp(gpio):
 	gpio.digital_write(GPIO_CS, GPIO.HIGH)
 
 	adcout = (r[1] << 8) & 0b1100000000
-	adcout = adcout | (r[2] & 0xff)		
+	adcout = adcout | (r[2] & 0xff)
 	adc_temp = (adcout *5.0/1023-0.5)*100
 
 	print("Temperatura:%2.1f " %adc_temp)
@@ -57,7 +56,7 @@ def readLumi(gpio):
 	gpio.digital_write(GPIO_CS, GPIO.HIGH)
 
 	adcout = (r[1] << 8) & 0b1100000000
-	adcout = adcout | (r[2] & 0xff)		
+	adcout = adcout | (r[2] & 0xff)
 
 	print("Luminosidade: %d" %adcout)
 
@@ -69,8 +68,3 @@ if __name__=='__main__':
 			readLumi(gpio)
 			detectaTilt(gpio)
 			time.sleep(0.5)
-
-
-
-
-	
