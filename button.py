@@ -7,7 +7,7 @@ from gpio_96boards import GPIO
 BUTTON = GPIO.gpio_id('GPIO_A')
 RELAY = GPIO.gpio_id('GPIO_C')
 
-pins = ((TILT, 'in'), (RELAY, 'out'))
+pins = ((TILT, 'in'), (RELAY, 'out'),)
 
 count = 0
 sleep_count = 0
