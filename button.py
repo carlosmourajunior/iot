@@ -15,11 +15,11 @@ sleep_count = 0
 with GPIO(pins) as gpio:
 	while True:
 
-		button_value = gpio.digital_read(TILT)
+		button_value = gpio.digital_read(BUTTON)
 
 		if button_value == 1:
-			gpio.digital_write(BUTTON, 1)
+			gpio.digital_write(RELAY, 1)
 		else:
-			gpio.digital_write(BUTTON, 0)
+			gpio.digital_write(RELAY, 0)
 
 		time.sleep(1)
