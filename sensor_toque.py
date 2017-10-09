@@ -19,6 +19,6 @@ with GPIO(pins) as gpio:
 		else:
 			gpio.digital_write(RELAY, 0)
 
-		print("Status do Relé: %d" %button_value)
+		print("Status do Rele: %d" %button_value)
 
 		time.sleep(1)
