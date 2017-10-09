@@ -4,10 +4,10 @@ from libsoc import gpio
 
 from gpio_96boards import GPIO
 
-BUTTON = GPIO.gpio_id('GPIO_A')
+TOQUE = GPIO.gpio_id('GPIO_A')
 RELAY = GPIO.gpio_id('GPIO_C')
 
-pins = ((BUTTON, 'in'), (RELAY, 'out'),)
+pins = ((TOQUE, 'in'), (RELAY, 'out'),)
 
 count = 0
 sleep_count = 0
@@ -15,13 +15,13 @@ sleep_count = 0
 with GPIO(pins) as gpio:
 	while True:
 
-		button_value = gpio.digital_read(BUTTON)
+		button_value = gpio.digital_read(TOQUE)
 
 		if button_value == 1:
 			gpio.digital_write(RELAY, 1)
 		else:
 			gpio.digital_write(RELAY, 0)
 
-		print("Status do Relé: %d" % button_value)
+		print("Status do Relé: %d" %button_value)
 
 		time.sleep(1)
