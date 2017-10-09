@@ -16,13 +16,15 @@ def detectTilt(gpio):
 	status = gpio.digital_read(TILT)
 	count = 0
 	tilt_detected = 0
-	while count < 1000:
+	while count < 100:
 		if gpio.digital_read(TILT) != status:
 			tilt_detected += 1
 			print("Tilt Detected")
 			if tilt_detected > 5:
 				print("Problem Detected")
+		time.sleep(0.02)
 
 with GPIO(pins) as gpio:
 	while True:
 		detectTilt(gpio)
+		time.sleep(0.5)
