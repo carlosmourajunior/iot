@@ -23,6 +23,7 @@ def detectTilt(gpio):
 			print("Tilt Detected")
 			if tilt_detected > 5:
 				print("Problem Detected")
+				tilt_detected = 0
 		time.sleep(0.02)
 
 with GPIO(pins) as gpio:
