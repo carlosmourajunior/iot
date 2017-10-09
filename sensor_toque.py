@@ -9,9 +9,6 @@ RELAY = GPIO.gpio_id('GPIO_C')
 
 pins = ((TOQUE, 'in'), (RELAY, 'out'),)
 
-count = 0
-sleep_count = 0
-
 with GPIO(pins) as gpio:
 	while True:
 
