@@ -1,7 +1,6 @@
 import spidev
 import time
 from libsoc import gpio
-
 from gpio_96boards import GPIO
 
 TILT = GPIO.gpio_id('GPIO_A')
