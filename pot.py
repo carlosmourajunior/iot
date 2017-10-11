@@ -22,7 +22,6 @@ def readadc(gpio):
     gpio.digital_write(GPIO_A, GPIO.HIGH)
     adcout = (r[1] << 8) & 0b1100000000
     adcout = adcout | (r[2] & 0xff)
-    adcout = (adcout * 5.0/1023-0.5) * 100
     return adcout
 
 while True:
