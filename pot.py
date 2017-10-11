@@ -3,9 +3,9 @@ import time
 from libsoc import gpio
 from gpio_96boards import GPIO
 
-GPIO_A = GPIO.gpio_id(‘GPIO_B’)
+GPIO_A = GPIO.gpio_id('GPIO_B')
 pins = (
- (GPIO_A, ‘out’),
+ (GPIO_A, 'out'),
 )
 
 spi = spidev.SpiDev()
@@ -27,6 +27,6 @@ def readadc(gpio):
 while True:
  with GPIO(pins) as gpio:
      value = readadc(gpio)
-     print(“value = %d” % value)
-     print(“----------------------”)
+     print("value = %d" % value)
+     print(" ---------------------- " )
      time.sleep(0.5)
