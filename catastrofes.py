@@ -16,20 +16,19 @@ spi.mode = 0b00
 spi.bits_per_word = 8
 
 def detectaTilt(gpio):
-
-	count = 0
+	status = gpio.digital_read(TILT)
+	tilt_detected = 0
 	sleep_count = 0
 	while sleep_count < 1000:
-
-		value = gpio.digital_read(TILT)
-		time.sleep(0.002)
-		if value == 1:
-			count += 1
-
+		if gpio.digital_read(TILT) != status:
+			tilt_detected += 1
+			status = gpio.digital_read(TILT)
+			if tilt_detected > 5:
+				print("Problem Detected")
+				tilt_detected = 0
+				break
 		sleep_count += 1
-
-
-	print("Contador: %d"  %count)
+		time.sleep(0.002)
 
 
 def readTemp(gpio):

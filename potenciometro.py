@@ -5,8 +5,9 @@ from libsoc import gpio
 from gpio_96boards import GPIO
 
 GPIO_CS = GPIO.gpio_id('GPIO_CS')
+RELE = GPIO.gpio_id('GPIO_A')
 
-pins = ((GPIO_CS, 'out'),)
+pins = ((GPIO_CS, 'out'),(RELE, 'out'),)
 
 spi = spidev.SpiDev()
 spi.open(0,0)
@@ -20,20 +21,20 @@ def readtemp(gpio):
 	time.sleep(0.0002)
 	gpio.digital_write(GPIO_CS, GPIO.LOW)
 	r = spi.xfer2([0x01, 0xA0, 0x00])
-	gpio.digital_write(GPIO_A, GPIO.HIGH)
+	gpio.digital_write(GPIO_CS, GPIO.HIGH)
 	adcout = (r[1] << 8) & 0b1100000000
 	adcout = adcout | (r[2] & 0xff)		
-
-	adc_temp = (adcout *5.0/1023-0.5)*100
+	print ("Valor do Pot.:%d" %adcout)
+	return adcout
 	
-	return adc_temp
-	
-
-
 while True:
 	with GPIO(pins) as gpio:
 		value = readtemp(gpio)
-		print ("Temperatura: %2.1f" %value)
+		if value > 500:
+			gpio.digital_write(RELE, GPIO.HIGH)
+		else:
+			gpio.digital_write(RELE, GPIO.LOW)		
+
 		time.sleep(0.5)
 
 
